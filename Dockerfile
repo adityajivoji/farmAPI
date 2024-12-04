@@ -8,6 +8,7 @@ RUN pip3 install --no-cache-dir flask flask-sqlalchemy
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 COPY . /app
+
 EXPOSE 5000
 
-CMD [ "python3", "farmapi.py"]
+CMD [ "python3", "run.py"]
