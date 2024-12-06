@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgreDocker:
+      image: postgres
+      environment:
+        POSTGRES_PASSWORD: adminaccess
+        POSTGRES_DB: farmer_db
+      ports:
+        - "5432:5432"
+      networks:
+        - farmapi_network
+  flaskapp:
+    build: .
+    ports:
+      - "5000:5000"
+    networks:
+      - farmapi_network
+    depends_on:
+      - "postgreDocker"
+    restart: on-failure:10
+    
+
+  
+
+networks:
+  farmapi_network:
+    driver: bridge

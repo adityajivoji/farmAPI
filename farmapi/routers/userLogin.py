@@ -1,9 +1,11 @@
-from farmapi import app,  bcrypt, loginManager, jwt, blacklist
-from flask import request, jsonify
+from farmapi import bcrypt, loginManager, jwt, blacklist
+from flask import Blueprint, request, jsonify
 from farmapi.models import User
 from flask_login import login_user, current_user, logout_user
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 from farmapi.authMiddleware.utils import requires_roles
+
+
 @loginManager.user_loader
 def load_user(user_id): 
     return User.query.get(int(user_id))
@@ -13,8 +15,9 @@ def check_if_token_in_blacklist(jwt_header, jwt_payload):
     jti = jwt_payload['jti']
     return jti in blacklist
 
+userlogin_bp = Blueprint('userlogin', __name__)
 
-@app.route("/login", methods=['POST'])
+@userlogin_bp.route("/login", methods=['POST'])
 def login():
     # TODO: Add current user logic
     username = request.form['username']
@@ -43,7 +46,7 @@ def login():
         return "Incorrect Password"
     
 
-@app.route("/logout", methods=['POST'])
+@userlogin_bp.route("/logout", methods=['POST'])
 @jwt_required()
 @requires_roles("superadmin", "admin", "user")
 def logout():
