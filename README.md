@@ -10,6 +10,7 @@ docker run --name postgreDocker -p 5432:5432 -e POSTGRES_PASSWORD=adminaccess -d
 docker start postgreDocker
 
 docker exec -it postgreDocker bash
+psql -U postgres
 CREATE DATABASE farmer_db;
 docker run --name postgreDocker --network farmapi_network -p 5432:5432 -e POSTGRES_PASSWORD=adminaccess -d postgres
 docker network connect farmapi_network postgreDocker

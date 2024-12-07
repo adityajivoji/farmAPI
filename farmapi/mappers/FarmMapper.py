@@ -6,7 +6,7 @@ def map_farmhelper_to_farm(farm_helper: FarmHelper) -> Farm:
         id=farm_helper.id,
         area=farm_helper.area,
         crop_grown=farm_helper.crop_grown,
-        sowing_date=None if not farm_helper.sowing_date else datetime.strptime(farm_helper.sowing_date, '%d/%m/%Y') ,
+        sowing_date=farm_helper.sowing_date,
         village=farm_helper.village,
         farmer_id=farm_helper.farmer_id
     )

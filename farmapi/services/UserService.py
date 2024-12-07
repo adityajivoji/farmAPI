@@ -13,8 +13,8 @@ def validateUsernameAndPassword(userHelper):
 class UserService:
 
     @staticmethod
-    def create_admin(username, password, email):
-        userHelper = UserHelper(username=username, password=password, email=email, roles="admin")
+    def create_admin(username, password, email, roles):
+        userHelper = UserHelper(username=username, password=password, email=email, roles=roles)
         if validateUsernameAndPassword(userHelper):
         
             return UserRepository.create_user(userHelper)
@@ -22,8 +22,8 @@ class UserService:
             return "Could not validate username and email"
     
     @staticmethod
-    def create_superadmin(username, password, email):
-        userHelper = UserHelper(username=username, password=password, email=email, roles="superadmin")
+    def create_superadmin(username, password, email, roles):
+        userHelper = UserHelper(username=username, password=password, email=email, roles=roles)
         if validateUsernameAndPassword(userHelper):
         
             return UserRepository.create_user(userHelper)
@@ -31,8 +31,8 @@ class UserService:
             return "Could not validate username and email"
     
     @staticmethod
-    def create_user(username, password, email):
-        userHelper = UserHelper(username=username, password=password, email=email, roles="user")
+    def create_user(username, password, email, roles):
+        userHelper = UserHelper(username=username, password=password, email=email, roles=roles)
         if validateUsernameAndPassword(userHelper):
         
             return UserRepository.create_user(userHelper)

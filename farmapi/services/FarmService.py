@@ -1,13 +1,13 @@
 from farmapi.helpers import FarmHelper
 from farmapi.repository import FarmRepository
-
+from datetime import datetime
 class FarmService:
     @staticmethod
     def add_farm(data):
         farmHelper = FarmHelper(
             area = data["area"],
             crop_grown=data["crop_grown"],
-            sowing_date=data["sowing_date"],
+            sowing_date=datetime.strptime(data["sowing_date"], '%d/%m/%Y') ,
             village=data["village"],
             farmer_id=data["farmer_id"]
         )

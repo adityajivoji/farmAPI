@@ -14,7 +14,8 @@ def register_admin():
     username = request.form['username']
     password = request.form['password']
     email = request.form['email']
-    result = UserService.create_admin(username=username, password=password, email=email)
+    roles = request.form["roles"].trim().split(',')
+    result = UserService.create_admin(username=username, password=password, email=email, roles = roles)
     return jsonify(result), 200
 
 @userregister_bp.route("/register/superadmin", methods=['POST'])
@@ -24,8 +25,8 @@ def register_superadmin():
     username = request.form['username']
     password = request.form['password']
     email = request.form['email']
-
-    result = UserService.create_superadmin(username=username, password=password, email=email)
+    roles = request.form["roles"].trim().split(',')
+    result = UserService.create_superadmin(username=username, password=password, email=email, roles = roles)
     return jsonify(result), 200
 
 
@@ -36,6 +37,6 @@ def register_user():
     username = request.form['username']
     password = request.form['password']
     email = request.form['email']
-
-    result = UserService.create_user(username=username, password=password, email=email)
+    roles = request.form["roles"].strip().split(',')
+    result = UserService.create_user(username=username, password=password, email=email, roles = roles)
     return jsonify(result), 200

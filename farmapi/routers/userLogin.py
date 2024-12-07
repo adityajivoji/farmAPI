@@ -28,11 +28,13 @@ def login():
     user = User.query.filter_by(username=username).first()
     if not user:
         return "Username not present"
+    user_roles = [role.slug for role in user.roles]
+        
     if bcrypt.check_password_hash(user.password, password):
         jwt_token = create_access_token(
             identity = str(user.id),
             additional_claims = {
-                "role": str(user.role)
+                "roles": user_roles
             }
         )
         login_user(user, remember=False)
