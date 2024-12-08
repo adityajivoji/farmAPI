@@ -1,7 +1,7 @@
 from farmapi import bcrypt, loginManager, jwt, blacklist
 from flask import Blueprint, request, jsonify
 from farmapi.models import User
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, logout_user
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt
 from farmapi.authMiddleware.utils import requires_roles
 

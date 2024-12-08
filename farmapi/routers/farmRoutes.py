@@ -1,8 +1,5 @@
 from markupsafe import escape
-from datetime import datetime
 from flask import request, Blueprint
-from farmapi import db
-from farmapi.models import Farm, Farmer
 from flask_jwt_extended import jwt_required
 from farmapi.authMiddleware.utils import requires_roles
 from farmapi.services import FarmService

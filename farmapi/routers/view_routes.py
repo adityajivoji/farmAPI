@@ -1,8 +1,6 @@
-from datetime import datetime
 from markupsafe import escape
 from flask import Blueprint, jsonify
 from farmapi.authMiddleware.utils import requires_roles
-from farmapi.models import Farmer, Schedule, Farm
 from flask_jwt_extended import jwt_required
 from farmapi.services import ViewService
 views_bp = Blueprint('views', __name__)

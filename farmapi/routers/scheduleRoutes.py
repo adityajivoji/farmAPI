@@ -1,8 +1,6 @@
 from markupsafe import escape
 from farmapi.authMiddleware.utils import requires_roles
 from flask import Blueprint, jsonify, request
-from farmapi.models import Schedule
-from farmapi import db
 from flask_jwt_extended import jwt_required
 
 from farmapi.services import ScheduleService

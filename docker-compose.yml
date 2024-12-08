@@ -1,6 +1,16 @@
-version: '3'
-
 services:
+  flaskapp:
+    build: .
+    ports:
+      - "5000:5000"
+
+    depends_on:
+      - "postgreDocker"
+    restart: on-failure:10
+    environment:
+      - SQLALCHEMY_DATABASE_URI='postgresql://postgres:adminaccess@localhost:8080/farmer_db'
+      - SECRET_KEY = 'd58f5cf962eee2061'
+      - JWT_SECRET_KEY = 'df8e5a7462e5c'
   postgreDocker:
       image: postgres
       environment:
@@ -8,21 +18,10 @@ services:
         POSTGRES_DB: farmer_db
       ports:
         - "5432:5432"
-      networks:
-        - farmapi_network
-  flaskapp:
-    build: .
-    ports:
-      - "5000:5000"
-    networks:
-      - farmapi_network
-    depends_on:
-      - "postgreDocker"
-    restart: on-failure:10
-    
+      # volumes:
+      #   - pg-data:/farmer_db
 
-  
 
-networks:
-  farmapi_network:
-    driver: bridge
+
+# volumes:
+#   pg-data:
