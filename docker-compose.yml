@@ -8,9 +8,11 @@ services:
       - "postgreDocker"
     restart: on-failure:10
     environment:
-      - SQLALCHEMY_DATABASE_URI='postgresql://postgres:adminaccess@localhost:8080/farmer_db'
-      - SECRET_KEY = 'd58f5cf962eee2061'
-      - JWT_SECRET_KEY = 'df8e5a7462e5c'
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@postgreDocker:5432/farmer_db
+      - SECRET_KEY=d58f5cf962eee2061
+      - JWT_SECRET_KEY=df8e5a7462e5c
+    networks:
+      - farmapi_network
   postgreDocker:
       image: postgres
       environment:
@@ -18,10 +20,20 @@ services:
         POSTGRES_DB: farmer_db
       ports:
         - "5432:5432"
-      # volumes:
-      #   - pg-data:/farmer_db
+      volumes:
+        - pg-data:/var/lib/postgresql/data
+      networks:
+      - farmapi_network
 
 
+volumes:
+  pg-data:
 
-# volumes:
-#   pg-data:
+
+    
+
+    
+  
+networks:
+  farmapi_network:
+    driver: bridge

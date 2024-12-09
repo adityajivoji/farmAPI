@@ -9,12 +9,13 @@ class FarmerRepository:
         farmer = map_farmerhelper_to_farmer(farmerHelper)
         db.session.add(farmer)
         db.session.commit()
+        return map_farmer_to_farmerhelper(farmer)
     
     @staticmethod
     def list_farmers():
         farmers = Farmer.query.all()
         if farmers:
-            return [map_farmer_to_farmerhelper(farmer).to_dict() for farmer in farmers]
+            return [map_farmer_to_farmerhelper(farmer) for farmer in farmers]
         else:
             []
     

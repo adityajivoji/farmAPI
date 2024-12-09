@@ -16,7 +16,7 @@ class UserRepository:
         db.session.add(user)
         db.session.commit()
         
-        return "User Added Successfully"
+        return map_user_to_userhelper(user)
     
     @staticmethod
     def getUserFromUsername(userHelper:UserHelper):

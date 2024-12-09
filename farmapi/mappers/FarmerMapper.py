@@ -10,10 +10,12 @@ def map_farmerhelper_to_farmer(farmer_helper: FarmerHelper) -> Farmer:
 
 
 def map_farmer_to_farmerhelper(farmer: Farmer) -> FarmerHelper:
-    return FarmerHelper(
+    ret = FarmerHelper(
         id=farmer.id,
         name=farmer.name,
         phone=farmer.phone,
         language=farmer.language,
         farms=farmer.farms
     )
+    print(ret.farms)
+    return ret

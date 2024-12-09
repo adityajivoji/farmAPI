@@ -9,21 +9,38 @@ class FarmerService:
             phone=data["phone"],
             language=data["language"]
         )
-        FarmerRepository.add_farmer(farmerHelper)
-        return "Farmer Added"
+        farmerHelper = FarmerRepository.add_farmer(farmerHelper)
+        
+        return farmerHelper.to_dict()
+    
+    @staticmethod
+    def list_farmers_dict():
+        farmerHelpers = FarmerRepository.list_farmers()
+        return [farmer.to_dict() for farmer in  farmerHelpers]
     
     @staticmethod
     def list_farmers():
         farmerHelpers = FarmerRepository.list_farmers()
-        return farmerHelpers
+        return [farmer for farmer in  farmerHelpers]
     
     @staticmethod
     def get_farmer(data):
-        print("in farmer service", data["id"],)
         farmerHelper = FarmerHelper(
             id = data["id"],
 
         )
         farmerHelper = FarmerRepository.get_farmer(farmerHelper)
-        print("farmer service", farmerHelper.farms)
+        
         return farmerHelper
+    
+    @staticmethod
+    def get_farmer_dict(data):
+        farmerHelper = FarmerHelper(
+            id = data["id"],
+
+        )
+        farmerHelper = FarmerRepository.get_farmer(farmerHelper)
+        if farmerHelper:
+            return farmerHelper.to_dict()
+        else:
+            return None

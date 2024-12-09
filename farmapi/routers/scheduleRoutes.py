@@ -28,5 +28,5 @@ def listfarmsbyfarmid(farm_id):
     data = {
         "farm_id":int(escape(farm_id))
     }
-    result = ScheduleService.list_schedules(data)
+    result = ScheduleService.list_schedules_dict(data)
     return jsonify(result), 200

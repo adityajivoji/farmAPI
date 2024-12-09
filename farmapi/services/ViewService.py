@@ -17,19 +17,18 @@ class ViewService:
         returnable = []
         for schedule in schedules:
             
-            das = schedule["days_after_sowing"]
-            farm_id = schedule["farm_id"]
+            das = schedule.days_after_sowing
+            farm_id = schedule.farm_id
             farm = FarmService.get_farm({"id": farm_id})
-            print(farm)
             if farm != None and farm.sowing_date:
                 dateDiff = today - farm.sowing_date
                 if 0 <= dateDiff.days - das < 2:
                     returnable.append(
-                        (
-                            farm.sowing_date + timedelta(days=das),
-                            farm.id,
-                            schedule["id"]
-                            )
+                        {
+                            "Date":farm.sowing_date + timedelta(days=das),
+                            "Farm Id":farm.id,
+                            "Schedule Id":schedule.id
+                        }
                     )
             
         return returnable
@@ -41,15 +40,15 @@ class ViewService:
         returnable = []
         unique_ids = set()
         for farmer in farmers:
-            farms = farmer["farms"]
+            farms = farmer.farms
             for farm in farms:
                 if farm.sowing_date != datetime(1990, 1, 1):
-                    if farmer["id"] not in unique_ids:
-                        unique_ids.add(farmer["id"])
+                    if farmer.id not in unique_ids:
+                        unique_ids.add(farmer.id)
                         returnable.append(
                             (
-                                farmer["id"],
-                                farmer["name"]
+                                farmer.id,
+                                farmer.name
                             )
                         )
                     

@@ -11,16 +11,16 @@ class ScheduleService:
             quantity_unit=data["quantity_unit"],
             farm_id=data["farm_id"]
         )
-        ScheduleRepository.add_schedule(scheduleHelper)
-        return "Schedule Added"
+        
+        return ScheduleRepository.add_schedule(scheduleHelper).to_dict()
     
     @staticmethod
-    def list_schedules(data):
+    def list_schedules_dict(data):
         scheduleHelper = ScheduleHelper(
             farm_id=data["farm_id"]
         )
         scheduleHelpers = ScheduleRepository.list_schedules(scheduleHelper)
-        return scheduleHelpers
+        return [schedule.to_dict() for schedule in scheduleHelpers]
     
     @staticmethod
     def get_all_schedule():

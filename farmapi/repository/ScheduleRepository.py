@@ -6,9 +6,10 @@ from farmapi.models import Farm, Schedule
 class ScheduleRepository:
     @staticmethod
     def add_schedule(scheduleHelper: ScheduleHelper):
-        farm = map_schedulehelper_to_schedule(scheduleHelper)
-        db.session.add(farm)
+        schedule = map_schedulehelper_to_schedule(scheduleHelper)
+        db.session.add(schedule)
         db.session.commit()
+        return map_schedule_to_schedulehelper(schedule)
     
     @staticmethod
     def list_schedules(scheduleHelper: ScheduleHelper):
@@ -16,7 +17,7 @@ class ScheduleRepository:
         schedules = Farm.query.filter_by(id=schedule.farm_id).first()
         if schedules:
             schedules = schedules.schedule
-            return [map_schedule_to_schedulehelper(schedule).to_dict() for schedule in schedules]
+            return [map_schedule_to_schedulehelper(schedule) for schedule in schedules]
         else:
             return []
         
@@ -25,6 +26,6 @@ class ScheduleRepository:
         schedules = Schedule.query.all()
         if schedules:
             schedules = schedules
-            return [map_schedule_to_schedulehelper(schedule).to_dict() for schedule in schedules]
+            return [map_schedule_to_schedulehelper(schedule) for schedule in schedules]
         else:
             return []

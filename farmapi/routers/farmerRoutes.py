@@ -23,5 +23,5 @@ def addFarmer():
 @jwt_required()
 @requires_roles("superadmin", "admin", "user")
 def listFarmers():
-    farmers = FarmerService.list_farmers()
+    farmers = FarmerService.list_farmers_dict()
     return jsonify(farmers), 200

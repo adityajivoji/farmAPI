@@ -19,6 +19,5 @@ def map_user_to_userhelper(user: User) -> UserHelper:
         id=user.id,
         username=user.username,
         email=user.email,
-        roles=user.roles,
-        password="hidden"
+        roles=user.roles
     )

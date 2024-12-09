@@ -11,8 +11,8 @@ class FarmService:
             village=data["village"],
             farmer_id=data["farmer_id"]
         )
-        FarmRepository.add_farm(farmHelper)
-        return "Farm Added"
+        
+        return FarmRepository.add_farm(farmHelper).to_dict()
     
     @staticmethod
     def list_farms(data):
@@ -20,7 +20,7 @@ class FarmService:
             farmer_id=data["farmer_id"]
         )
         farmHelpers = FarmRepository.list_farms(farmHelper)
-        return farmHelpers
+        return [farm.to_dict() for farm in farmHelpers]
     
     @staticmethod
     def get_farm(data):

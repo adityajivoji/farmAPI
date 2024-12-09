@@ -14,6 +14,8 @@ def register_admin():
     email = request.form['email']
     roles = request.form["roles"].strip().split(',')
     result = UserService.create_admin(username=username, password=password, email=email, roles = roles)
+    print(result)
+    print(type(result))
     return jsonify(result), 200
 
 @userregister_bp.route("/register/superadmin", methods=['POST'])

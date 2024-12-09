@@ -17,7 +17,9 @@ class UserService:
         userHelper = UserHelper(username=username, password=password, email=email, roles=roles)
         if validateUsernameAndPassword(userHelper):
         
-            return UserRepository.create_user(userHelper)
+            userHelper = UserRepository.create_user(userHelper)
+            retval = userHelper.to_dict()
+            return retval
         else:
             return "Could not validate username and email"
     
@@ -26,7 +28,9 @@ class UserService:
         userHelper = UserHelper(username=username, password=password, email=email, roles=roles)
         if validateUsernameAndPassword(userHelper):
         
-            return UserRepository.create_user(userHelper)
+            userHelper = UserRepository.create_user(userHelper)
+            retval = userHelper.to_dict()
+            return retval
         else:
             return "Could not validate username and email"
     
@@ -34,8 +38,9 @@ class UserService:
     def create_user(username, password, email, roles):
         userHelper = UserHelper(username=username, password=password, email=email, roles=roles)
         if validateUsernameAndPassword(userHelper):
-        
-            return UserRepository.create_user(userHelper)
+            userHelper = UserRepository.create_user(userHelper)
+            retval = userHelper.to_dict()
+            return retval
         else:
             return "Could not validate username and email"
         

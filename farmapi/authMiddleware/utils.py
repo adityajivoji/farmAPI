@@ -16,4 +16,4 @@ def requires_roles(*roles):
                 return jsonify({"msg": "User does not have necessary permission to access this resource"})
             return fn(*args, **kwargs)
         return decorator
-    return wrapper
+    return  wrapper

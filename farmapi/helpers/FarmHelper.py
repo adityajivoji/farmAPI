@@ -11,5 +11,11 @@ class FarmHelper(BaseModel):
     schedule: Optional[List[Any]] = None
     
     def to_dict(self):
-        # Get the dictionary representation of the model and filter out None values
+        self.convert_schedule_to_dict()
         return {key: value for key, value in self.model_dump().items() if value is not None}
+    
+    def convert_schedule_to_dict(self):
+        self.schedule = [
+        {key: value for key, value in s.__dict__.items() if key != '_sa_instance_state'}
+        for s in self.schedule
+        ]

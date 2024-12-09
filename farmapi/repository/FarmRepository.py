@@ -9,6 +9,7 @@ class FarmRepository:
         farm = map_farmhelper_to_farm(farmHelper)
         db.session.add(farm)
         db.session.commit()
+        return map_farm_to_farmhelper(farm)
     
     @staticmethod
     def list_farms(farmHelper: FarmHelper):
@@ -16,14 +17,13 @@ class FarmRepository:
         farms = Farmer.query.filter_by(id=farm.farmer_id).first()
         if farms:
             farms = farms.farms
-            return [map_farm_to_farmhelper(farm).to_dict() for farm in farms]
+            return [map_farm_to_farmhelper(farm) for farm in farms]
         else:
             return []
     
     @staticmethod
     def get_farm(farmHelper: FarmHelper):
         farm = map_farmhelper_to_farm(farmHelper)
-        print(farm.id)
         farm = Farm.query.filter_by(id=farm.id).first()
         if farm:
             return map_farm_to_farmhelper(farm)
