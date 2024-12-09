@@ -1,1 +1,2 @@
-fenv
+fenv/
+__pycache__/

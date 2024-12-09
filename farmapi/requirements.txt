@@ -7,3 +7,4 @@ Flask-Restful
 pydantic
 psycopg2-binary
 Flask-Migrate
+uwsgi

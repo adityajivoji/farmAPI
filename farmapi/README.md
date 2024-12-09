@@ -41,5 +41,7 @@ we have to separate the functionality of router, service, repository
 
 find . -type d -name "__pycache__" -exec rm -rf {} +
 
+sudo lsof -i -P -n | grep 5432
+
 THINGS TO DO:
 1. make the roles a list
