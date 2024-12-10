@@ -1,0 +1,86 @@
+services:
+  farmapi:
+    build: ./farmapi
+    image: farmapi:latest
+    container_name: farmapi
+    depends_on:
+      - "postgreDocker"
+    restart: always
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@postgreDocker:5432/farmer_db
+      - SECRET_KEY=d58f5cf962eee2061
+      - JWT_SECRET_KEY=df8e5a7462e5c
+      - FLASK_ENV=production
+    networks:
+      - farmapi_overlay_network 
+    expose:
+      - 5000
+
+  postgreDocker:
+    image: postgres
+    container_name: postgreDocker
+    environment:
+      POSTGRES_PASSWORD: adminaccess
+      POSTGRES_DB: farmer_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - farmapi_overlay_network 
+
+  nginx:
+    container_name: nginx
+    image: nginx_custom:latest
+    depends_on:
+      - farmapi
+    build: ./nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - farmapi_overlay_network 
+
+volumes:
+  pg-data:
+
+networks:
+  farmapi_overlay_network:
+    driver: overlay
+
+
+
+
+
+services:
+  farmapi:
+    image: farmapi:latest
+    depends_on:
+      - "postgreDocker"
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@postgreDocker:5432/farmer_db
+      - SECRET_KEY=d58f5cf962eee2061
+      - JWT_SECRET_KEY=df8e5a7462e5c
+      - FLASK_ENV=production
+
+  postgreDocker:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: adminaccess
+      POSTGRES_DB: farmer_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+
+  nginx_custom:
+    image: nginx_custom:latest
+    depends_on:
+      - farmapi
+    ports:
+      - "80:80"
+
+
+volumes:
+  pg-data:
