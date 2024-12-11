@@ -2,3 +2,6 @@ docker tag nginx_custom:latest adityajivoji/nginx_custom:latest
 docker tag farmapi:latest adityajivoji/farmapi:latest
 docker push  adityajivoji/farmapi:latest
 docker push  adityajivoji/nginx_custom:latest
+
+
+ docker service inspect farmapi_stack_farmapi --format '{{json .Endpoint.Ports}}'

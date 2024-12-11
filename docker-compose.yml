@@ -28,7 +28,7 @@ services:
 
 
   nginx_custom:
-    image: adityajivoji/nginx_custom:latest
+    image: nginx_custom:latest
     depends_on:
       - farmapi
     restart: always
