@@ -1,0 +1,1 @@
+gunicorn -c ./gunicorn.conf.py 'farmapi:create_app()'
