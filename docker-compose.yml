@@ -5,8 +5,8 @@ configs:
 services:
   farmapi:
     image: adityajivoji/farmapi:latest
-    depends_on:
-      - "postgreDocker"
+    # depends_on:
+    #   - "postgreDocker"
     restart: always
     environment:
       - SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@postgreDocker:5432/farmer_db
@@ -14,7 +14,8 @@ services:
       - JWT_SECRET_KEY=df8e5a7462e5c
     ports:
       - "5000:5000" 
-    
+    networks:
+      - web_net
 
   postgreDocker:
     image: postgres
@@ -25,12 +26,13 @@ services:
       - "5432:5432"
     volumes:
       - pg-data:/var/lib/postgresql/data
-
+    networks:
+      - web_net
 
   nginx_custom:
     image: nginx_custom:latest
-    depends_on:
-      - farmapi
+    # depends_on:
+    #   - farmapi
     restart: always
     ports:
       - "80:80"
@@ -40,7 +42,13 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
+    networks:
+      - web_net
 
+networks:
+  web_net:
+
+  
 
 volumes:
   pg-data:

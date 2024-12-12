@@ -16,16 +16,11 @@ blacklist = set()
 blacklist = set()
 
 
-
-
-
-
-
-
     
 def create_app(config_class = Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+    print("App created")
     from farmapi.routers.farmerRoutes import farmer_bp
     from farmapi.routers.farmRoutes import farm_bp
     from farmapi.routers.scheduleRoutes import schedule_bp

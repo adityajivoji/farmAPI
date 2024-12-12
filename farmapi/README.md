@@ -5,7 +5,7 @@ docker run -p 5000:5000 farmapi
 ```
 
 ```
-docker run --name postgresDocker -p 8080:5432 -e POSTGRES_PASSWORD=adminaccess -d postgres
+docker run --name postgresDocker -p 5432:5432 -e POSTGRES_PASSWORD=adminaccess -d postgres
 
 docker start postgreDocker
 

@@ -5,3 +5,8 @@ docker push  adityajivoji/nginx_custom:latest
 
 
  docker service inspect farmapi_stack_farmapi --format '{{json .Endpoint.Ports}}'
+
+
+export SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@localhost:5432/farmer_db
+export SECRET_KEY=d58f5cf962eee2061
+export JWT_SECRET_KEY=df8e5a7462e5c
