@@ -1,0 +1,58 @@
+configs:
+  nginx_conf:
+    file: ./nginx/nginx.conf
+
+networks:
+  web_net:
+
+volumes:
+  pg-data:
+
+services:
+  farmapi:
+    image: adityajivoji/farmapi:latest
+    environment:
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@postgreDocker:5432/farmer_db
+      - SECRET_KEY=d58f5cf962eee2061
+      - JWT_SECRET_KEY=df8e5a7462e5c
+    ports:
+      - "5000:5000" 
+    networks:
+      - web_net
+    deploy:
+      restart_policy:
+        condition: any
+
+  postgreDocker:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: adminaccess
+      POSTGRES_DB: farmer_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    networks:
+      - web_net
+    deploy:
+      restart_policy:
+        condition: any
+
+  nginx_custom:
+    image: adityajivoji/nginx_custom:latest
+    ports:
+      - "80:80"
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/nginx.conf
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - web_net
+    deploy:
+      restart_policy:
+        condition: any
+
+
+  
