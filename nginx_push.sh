@@ -1,4 +1,4 @@
-docker build ./nginx/ -t nginx_custom --no-cache
+docker build ./nginx/ -t nginx_custom
 
 docker tag nginx_custom:latest adityajivoji/nginx_custom:latest
 

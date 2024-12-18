@@ -26,4 +26,13 @@ class ScheduleService:
     def get_all_schedule():
         scheduleHelpers = ScheduleRepository.get_all_schedules()
         return scheduleHelpers
+    
+    @staticmethod
+    def get_schedules_dict(data):
+        scheduleHelper = ScheduleHelper(
+            id=data["id"]
+        )
+        scheduleHelper = ScheduleRepository.get_schedules(scheduleHelper)
+        print(scheduleHelper)
+        return None if scheduleHelper is None else scheduleHelper.to_dict()
         

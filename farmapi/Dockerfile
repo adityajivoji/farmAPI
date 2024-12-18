@@ -7,7 +7,7 @@ RUN pip install --upgrade pip
 ENV PYTHONUNBUFFERED=1
 WORKDIR /farmapi
 COPY . /farmapi
-RUN pip install uwsgi -I
+# RUN pip install uwsgi -I
 RUN pip install -r requirements.txt
-
-CMD [ "uwsgi", "app.ini"]
+EXPOSE 5000
+CMD ["gunicorn","--workers=5","-b","0.0.0.0:5000","farmapi:create_app()","--timeout","0"]

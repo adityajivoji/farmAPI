@@ -10,11 +10,12 @@ farm_bp = Blueprint('farm', __name__)
 @jwt_required()
 @requires_roles("superadmin", "admin")
 def add_farm(farmer_id):
+    req = request.get_json()
     data = {
-        "area":request.form["area"],
-        "crop_grown":request.form["crop_grown"],
-        "sowing_date": request.form["sowing_date"],
-        "village":request.form["village"],
+        "area":req.get('area'),
+        "crop_grown":req.get('crop_grown'),
+        "sowing_date": req.get('sowing_date'),
+        "village":req.get('village'),
         "farmer_id":int(escape(farmer_id))
     }
     result = FarmService.add_farm(data)
@@ -31,4 +32,3 @@ def listfarmsbyfarmerid(farmer_id):
     result = FarmService.list_farms(data)
 
     return result
-

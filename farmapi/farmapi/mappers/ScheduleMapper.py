@@ -2,6 +2,7 @@ from farmapi.models import Schedule
 from farmapi.helpers import ScheduleHelper
 def map_schedulehelper_to_schedule(schedule_helper: ScheduleHelper) -> Schedule:
     return Schedule(
+        id=schedule_helper.id,
         days_after_sowing=schedule_helper.days_after_sowing,
         fertilizer=schedule_helper.fertilizer,
         quantity=schedule_helper.quantity,

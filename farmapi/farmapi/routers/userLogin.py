@@ -62,7 +62,7 @@ def logout():
     jti = get_jwt()['jti']
     blacklist.add(jti)
     logout_user()
-    return "Logged Out Successfully"
+    return jsonify("Logged Out Successfully")
     
 
     

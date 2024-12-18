@@ -29,3 +29,12 @@ class ScheduleRepository:
             return [map_schedule_to_schedulehelper(schedule) for schedule in schedules]
         else:
             return []
+        
+    @staticmethod
+    def get_schedules(scheduleHelper: ScheduleHelper):
+        schedule = map_schedulehelper_to_schedule(scheduleHelper)
+        schedule = Schedule.query.filter_by(id=schedule.id).first()
+        if schedule:
+            return map_schedule_to_schedulehelper(schedule)
+        else:
+            return None

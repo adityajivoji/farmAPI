@@ -15,6 +15,7 @@ services:
       - SQLALCHEMY_DATABASE_URI=postgresql://postgres:adminaccess@postgreDocker:5432/farmer_db
       - SECRET_KEY=d58f5cf962eee2061
       - JWT_SECRET_KEY=df8e5a7462e5c
+      - FLASK_ENV=production
     ports:
       - "5000:5000" 
     networks:

@@ -11,11 +11,12 @@ schedule_bp = Blueprint('schedule', __name__)
 @jwt_required()
 @requires_roles("superadmin", "admin")
 def addSchedule(farm_id):
+    req = request.get_json()
     data = {
-        "days_after_sowing":int(request.form["days_after_sowing"]),
-        "quantity":int(request.form["quantity"]),
-        "fertilizer":request.form["fertilizer"],
-        "quantity_unit":request.form["quantity_unit"],
+        "days_after_sowing":int(req.get('days_after_sowing')),
+        "quantity":int(req.get('quantity')),
+        "fertilizer":req.get('fertilizer'),
+        "quantity_unit":req.get('quantity_unit'),
         "farm_id":int(escape(farm_id))
     }
     result = ScheduleService.add_schedule(data)
@@ -29,4 +30,15 @@ def listfarmsbyfarmid(farm_id):
         "farm_id":int(escape(farm_id))
     }
     result = ScheduleService.list_schedules_dict(data)
+    return jsonify(result), 200
+
+
+@schedule_bp.route('/get/schedules/<int:schedule_id>', methods=['GET'])
+@jwt_required()
+@requires_roles("superadmin", "admin", "user")
+def getSchedule(schedule_id):
+    data = {
+        "id":int(escape(schedule_id))
+    }
+    result = ScheduleService.get_schedules_dict(data)
     return jsonify(result), 200
