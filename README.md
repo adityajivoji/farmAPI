@@ -59,6 +59,8 @@ docker push adityajivoji/nginx:latest
 
 docker exec -it e5c65d879159 cat /var/log/uwsgi.log
 
+docker stack rm farmapi_stack
+
 docker stack deploy -c docker-compose.yml farmapi_stack
 
 
@@ -72,7 +74,6 @@ To add a worker to this swarm, run the following command:
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions. -->
 
-docker stack rm farmapi_stack
 docker image prune -a
 
 Swarm initialized: current node (vfocae98whtmnz3tfq4d23spp) is now a manager.
