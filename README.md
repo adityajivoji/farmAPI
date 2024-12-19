@@ -76,13 +76,14 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 docker image prune -a
 
-Swarm initialized: current node (vfocae98whtmnz3tfq4d23spp) is now a manager.
+Swarm initialized: current node (vayoms372olfjdxfmmfnrwptu) is now a manager.
 
 To add a worker to this swarm, run the following command:
 
-    docker swarm join --token SWMTKN-1-4ql9ezrotdio7jce7zo6yun382l369tyygwkywhhlw6fyi8mzz-2l2imj0lil5mq2f5dhaawssb8 172.31.10.64:2377
+    docker swarm join --token SWMTKN-1-0sdegi0iua9xnj97jg8je9vetpzwv7s6khv8aaaz1bymwttbc4-b6u06vhipek360hj50exvw12z 3.7.254.205:2377
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
 
 
 docker build ./nginx/ -t nginx_custom --no-cache
