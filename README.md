@@ -75,6 +75,14 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 docker stack rm farmapi_stack
 docker image prune -a
 
+Swarm initialized: current node (vfocae98whtmnz3tfq4d23spp) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-4ql9ezrotdio7jce7zo6yun382l369tyygwkywhhlw6fyi8mzz-2l2imj0lil5mq2f5dhaawssb8 172.31.10.64:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
 
 docker build ./nginx/ -t nginx_custom --no-cache
 

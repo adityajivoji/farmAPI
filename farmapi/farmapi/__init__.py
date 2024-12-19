@@ -20,7 +20,7 @@ blacklist = set()
 def create_app(config_class = Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    CORS(app, supports_credentials=True, origins="http://host.docker.internal:4200")
+    CORS(app, supports_credentials=True, origins="https://farmapifront.web.app")
 
 
     print("App created")

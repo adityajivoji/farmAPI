@@ -43,6 +43,7 @@ services:
     image: adityajivoji/nginx_custom:latest
     ports:
       - "80:80"
+      - "443:443"
     configs:
       - source: nginx_conf
         target: /etc/nginx/nginx.conf
