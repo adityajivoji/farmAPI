@@ -45,7 +45,7 @@ def create_app(config_class = Config):
     jwt.init_app(app)
     with app.app_context():
         db.create_all()
-        # from farmapi.utils import initialize_roles_and_superadmin
-        # initialize_roles_and_superadmin(db)
+        from farmapi.utils import initialize_roles_and_superadmin
+        initialize_roles_and_superadmin(db)
     print("App Creation Completed")
     return app
