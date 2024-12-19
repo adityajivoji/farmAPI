@@ -50,8 +50,8 @@ services:
     deploy:
       restart_policy:
         condition: any
-    volumes:
-      -  /etc/nginx/ssl:/etc/nginx/ssl
+    # volumes:
+    #   -  /etc/nginx/ssl:/etc/nginx/ssl
 
 
   
